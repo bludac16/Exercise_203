@@ -9,19 +9,19 @@
  * @author David
  */
 public class KniffelRow {
-    private int auswahl;
+    private int[] auswahl;
     private int punkte;
 
-    public KniffelRow(int auswahl, int punkte) {
+    public KniffelRow(int[] auswahl, int punkte) {
         this.auswahl = auswahl;
         this.punkte = punkte;
     }
 
-    public int getAuswahl() {
+    public int[] getAuswahl() {
         return auswahl;
     }
 
-    public void setAuswahl(int auswahl) {
+    public void setAuswahl(int[] auswahl) {
         this.auswahl = auswahl;
     }
 

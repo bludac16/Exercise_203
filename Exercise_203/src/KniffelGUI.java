@@ -1,3 +1,6 @@
+
+import java.util.Random;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +12,7 @@
  * @author David
  */
 public class KniffelGUI extends javax.swing.JFrame {
-
+Random rand = new Random();
     /**
      * Creates new form KniffelGUI
      */
@@ -27,24 +30,24 @@ public class KniffelGUI extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        spReihe = new javax.swing.JScrollPane();
+        tableReihe = new javax.swing.JTable();
+        btWürfeln = new javax.swing.JButton();
+        spGewinnkarte = new javax.swing.JScrollPane();
+        tableGewinnkarte = new javax.swing.JTable();
+        panelPunkte = new javax.swing.JPanel();
+        lbObereSumme = new javax.swing.JLabel();
+        tfObereSumme = new javax.swing.JTextField();
+        lbObererBonus = new javax.swing.JLabel();
+        tfObererBonus = new javax.swing.JTextField();
+        lbUntereSumme = new javax.swing.JLabel();
+        tfUntereSumme = new javax.swing.JTextField();
+        lbGesamtPunkte = new javax.swing.JLabel();
+        tfGesamtPunkte = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableReihe.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,11 +58,18 @@ public class KniffelGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        spReihe.setViewportView(tableReihe);
 
-        jButton1.setText("jButton1");
+        btWürfeln.setText("würfeln");
+        btWürfeln.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btWürfelnActionPerformed(evt);
+            }
+        });
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        spGewinnkarte.setBorder(javax.swing.BorderFactory.createTitledBorder("Gewinnkarte"));
+
+        tableGewinnkarte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,105 +80,106 @@ public class KniffelGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        spGewinnkarte.setViewportView(tableGewinnkarte);
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        panelPunkte.setBorder(javax.swing.BorderFactory.createTitledBorder("Punkte"));
+        panelPunkte.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setText("jLabel1");
+        lbObereSumme.setText("Obere Summe:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jLabel1, gridBagConstraints);
-
-        jTextField1.setText("jTextField1");
+        panelPunkte.add(lbObereSumme, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jTextField1, gridBagConstraints);
+        panelPunkte.add(tfObereSumme, gridBagConstraints);
 
-        jLabel2.setText("jLabel2");
+        lbObererBonus.setText("Oberer Bonus:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jLabel2, gridBagConstraints);
-
-        jTextField2.setText("jTextField2");
+        panelPunkte.add(lbObererBonus, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jTextField2, gridBagConstraints);
+        panelPunkte.add(tfObererBonus, gridBagConstraints);
 
-        jLabel3.setText("jLabel3");
+        lbUntereSumme.setText("Untere Summe:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jLabel3, gridBagConstraints);
-
-        jTextField3.setText("jTextField3");
+        panelPunkte.add(lbUntereSumme, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jTextField3, gridBagConstraints);
+        panelPunkte.add(tfUntereSumme, gridBagConstraints);
 
-        jLabel4.setText("jLabel4");
+        lbGesamtPunkte.setText("Gesamt-Punkte:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jLabel4, gridBagConstraints);
-
-        jTextField4.setText("jTextField4");
+        panelPunkte.add(lbGesamtPunkte, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jTextField4, gridBagConstraints);
+        panelPunkte.add(tfGesamtPunkte, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPunkte, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(spGewinnkarte, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(spReihe, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                    .addComponent(btWürfeln, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spReihe, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btWürfeln, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(spGewinnkarte, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(panelPunkte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btWürfelnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btWürfelnActionPerformed
+    int[] würfel = {};  
+        for (int i = 0; i < 5; i++)
+        {
+            würfel[i] = 1 + rand.nextInt(5);
+        }
+    }//GEN-LAST:event_btWürfelnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,19 +217,19 @@ public class KniffelGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JButton btWürfeln;
+    private javax.swing.JLabel lbGesamtPunkte;
+    private javax.swing.JLabel lbObereSumme;
+    private javax.swing.JLabel lbObererBonus;
+    private javax.swing.JLabel lbUntereSumme;
+    private javax.swing.JPanel panelPunkte;
+    private javax.swing.JScrollPane spGewinnkarte;
+    private javax.swing.JScrollPane spReihe;
+    private javax.swing.JTable tableGewinnkarte;
+    private javax.swing.JTable tableReihe;
+    private javax.swing.JTextField tfGesamtPunkte;
+    private javax.swing.JTextField tfObereSumme;
+    private javax.swing.JTextField tfObererBonus;
+    private javax.swing.JTextField tfUntereSumme;
     // End of variables declaration//GEN-END:variables
 }
